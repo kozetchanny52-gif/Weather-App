@@ -1,0 +1,80 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+.app-container,.input-group-bg{
+    background-color:#061735;
+}
+header i{
+    font-size:1.2rem !important;
+}
+p{
+ color: #808eb6;
+}
+header p,.search-container p{
+    font-size: 1rem;
+    
+}
+.search-container{
+    background-color: #10264D;
+}
+.search-container .input-group-text {
+    position: relative;
+    z-index: 4;
+    flex: 0 0 auto;
+}
+.bi-search{
+    color: #808eb6;
+}
+.search-container .form-control {
+    color: #808eb6 !important;
+    box-shadow: none;
+
+}
+
+.search-container .form-control:focus {
+    box-shadow: none;
+}
+.search-container .input-group-border-color{
+    border-color: #646b78 !important;
+}
+.search-container .form-control::placeholder {
+    color: #808eb6;
+    opacity: 1;
+    font-size: 0.85rem;
+}
+.weather-icon{
+    font-size: 6em;
+}
+.forecast-section {
+    padding: 0.5rem;
+}
+.forecast-period,
+.forecast-low {
+    color: #8eafe9;
+}
+.forecast-day {
+    background-color: #10264d;
+    border: 1px solid #244579;
+}
+.forecast-day-name {
+    color: #dce8ff;
+    font-weight: 600;
+}
+.forecast-weather-icon {
+    display: inline-block;
+    margin: 0.5rem 0;
+    color: #ffd447;
+    font-size: 1.8rem;
+}
+.forecast-high {
+    color: #f4f7ff;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.forecast-low {
+    margin-top: 0.15rem;
+}
+
+@media (max-width: 575.98px) {
+    .forecast-section {
+        padding: 0;
+    }
+}
