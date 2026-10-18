@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
 import { Header } from './components/Header.jsx'
 import { SearchBar } from './components/SearchBar.jsx'
 import { CurrentWeather } from './components/CurrentWeather.jsx'
