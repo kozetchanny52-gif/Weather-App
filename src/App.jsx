@@ -43,7 +43,7 @@ function App() {
         }
 
         const weatherResponse = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&wind_speed_unit=ms`,
+          `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=5&wind_speed_unit=ms`,
         )
 
         if (!weatherResponse.ok) {
@@ -53,7 +53,7 @@ function App() {
         const weather = await weatherResponse.json()
 
         if (!cancelled) {
-          setData({ ...weather.current, city_name: city.name })
+          setData({ ...weather.current, daily: weather.daily, city_name: city.name })
         }
       } catch (requestError) {
         if (!cancelled) {
@@ -85,7 +85,12 @@ function App() {
         windspeed={data?.wind_speed_10m}
         humidity={data?.relative_humidity_2m}
       />
-      <Forecast />
+      <Forecast
+        forecast={data?.daily?.time}
+        forecast_max_temps={data?.daily?.temperature_2m_max}
+        forecast_min_temps={data?.daily?.temperature_2m_min}
+        forecast_weather_conditions={data?.daily?.weather_code}
+      />
       {error ? <p role="alert">{error}</p> : null}
     </div>
   )

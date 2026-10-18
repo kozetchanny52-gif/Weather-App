@@ -1,12 +1,19 @@
-const forecastDays = [
-  { day: 'Mon', icon: 'bi-sun-fill', high: 24, low: 14 },
-  { day: 'Tue', icon: 'bi-cloud-rain-fill', high: 20, low: 12 },
-  { day: 'Wed', icon: 'bi-cloud-fill', high: 18, low: 11 },
-  { day: 'Thu', icon: 'bi-cloud-sun-fill', high: 21, low: 12 },
-  { day: 'Fri', icon: 'bi-sun-fill', high: 23, low: 13 },
-]
-
-export function Forecast() {
+function getWeatherInfo(id) {
+        if (id === 0) return "bi-sun-fill";
+        if (id <= 2) return  "bi-cloud-sun-fill";
+        if (id === 3) return  "bi-cloud-fill";
+        if (id <= 48) return "bi-cloud-fog2-fill";
+        if (id <= 67 || (id >= 80 && id <= 82)) return  "bi-cloud-rain-fill";
+        if (id <= 86) return "bi-snow";
+        if (id >= 95) return "bi-cloud-lightning-rain-fill";
+        return  "bi-cloud";
+}
+export function Forecast({
+  forecast = [],
+  forecast_max_temps = [],
+  forecast_min_temps = [],
+  forecast_weather_conditions = [],
+}) {
   return (
     <section className="forecast-section mt-3" aria-labelledby="forecast-heading">
       <div className="d-flex align-items-center justify-content-between mb-2">
@@ -14,13 +21,17 @@ export function Forecast() {
         <span className="forecast-period">Daily</span>
       </div>
       <div className="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-2">
-        {forecastDays.map(({ day, icon, high, low }) => (
+        {forecast.map((day, index) => (
           <div className="col" key={day}>
             <div className="forecast-day h-100 rounded-3 p-3 text-center">
-              <p className="forecast-day-name mb-2">{day}</p>
-              <i className={`bi ${icon} forecast-weather-icon`} aria-hidden="true" />
-              <p className="forecast-high mb-0">{high}°</p>
-              <p className="forecast-low mb-0">{low}°</p>
+              <p className="forecast-day-name mb-2">
+                {new Date(`${day}T00:00:00`).toLocaleDateString(undefined, {
+                  weekday: 'long',
+                })}
+              </p>
+              <i className={`bi ${getWeatherInfo(forecast_weather_conditions[index])} forecast-weather-icon`} aria-hidden="true" />
+              <p className="forecast-high mb-0">{forecast_max_temps[index]}°</p>
+              <p className="forecast-low mb-0">{forecast_min_temps[index]}°</p>
             </div>
           </div>
         ))}
